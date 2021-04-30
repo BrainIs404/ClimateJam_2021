@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class PathFollower : MonoBehaviour {
+    public string name;
     Node[] PathNode;
 
     public GameObject Player;
