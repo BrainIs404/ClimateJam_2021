@@ -3,20 +3,21 @@ using System.Collections;
 
 public class PathFollower : MonoBehaviour {
     Node[] PathNode;
+
     public GameObject Player;
     public float MoveSpeed;
     float Timer;
 
-    int CurrentNode;
+    int CurrentNode = 0;
     Vector2 startPosition;
 
-    bool isMove = false;
+    public bool isMove = false;
     static Vector3 CurrentPositionHolder;
     void Start() {
         PathNode = GetComponentsInChildren<Node>();
+        
         Debug.Log(PathNode);
         CheckNode();
-        
     }
 
     void CheckNode() {
@@ -25,24 +26,13 @@ public class PathFollower : MonoBehaviour {
         CurrentPositionHolder = PathNode[CurrentNode].transform.position;
     }
 
-
-    void DrawLine() {
-        for (int i = 0; i < PathNode.Length - 1; i++) {
-            Vector2 currentPos = PathNode[i].transform.position;
-            Vector2 nextPos = PathNode[i+1].transform.position;
-            Debug.DrawLine(currentPos, nextPos, Color.blue);
-        }
-    }
-
     void Update() {
-        DrawLine();
-        if (Input.GetMouseButtonDown(0)) {
-            isMove = !isMove;
-        }
-
         if (isMove) {
-            
-            Debug.Log(CurrentNode);
+            /*
+            if (Input.GetMouseButtonDown(0)) {
+                isMove = !isMove;
+            }*/
+
             Timer += Time.deltaTime * MoveSpeed;
 
             if (Player.transform.position != CurrentPositionHolder) {
@@ -52,9 +42,16 @@ public class PathFollower : MonoBehaviour {
                     CurrentNode++;
                     CheckNode();
                 } else {
-                    isMove = !isMove;
+                    System.Array.Reverse(PathNode);
+                    CurrentNode = 0;
+                    isMove = false;
                 }
             }
         }
+    }
+
+    public void canMove()
+    {
+        isMove = true;
     }
 }
