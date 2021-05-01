@@ -39,6 +39,11 @@ public class PathFollower : MonoBehaviour {
 
             if (Player.transform.position != CurrentPositionHolder) {
                 Player.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, Timer);
+                /*
+                Vector3 pos = Player.transform.position;
+                pos.z = 1;
+                Player.transform.position = pos; */
+
             } else {
                 if (CurrentNode < PathNode.Length - 1) {
                     CurrentNode++;
@@ -49,6 +54,7 @@ public class PathFollower : MonoBehaviour {
                     isMove = false;
                 }
             }
+
         }
     }
 
