@@ -9,12 +9,8 @@ public class MovePlayer : MonoBehaviour
 
     public Node start;
     public Node end;
-
-    // Start is called before the first frame update
-    void OnMouseDown() {
-        Vector2 playerPosition = player.transform.position;
-        Vector2 nodePosition = new Vector2();
-
+    Vector2 nodePosition = new Vector2();
+    void Start() {
         if (this.name == "Start") {
             nodePosition = end.transform.position;
         }
@@ -22,12 +18,17 @@ public class MovePlayer : MonoBehaviour
         if (this.name == "End") {
             nodePosition = start.transform.position;
         }
+    }
 
+    // Start is called before the first frame update
+    void OnMouseDown() {
+        Vector2 playerPosition = player.transform.position;
+        
         if (playerPosition.x >= (nodePosition.x - 5) && playerPosition.x <= (nodePosition.x + 5))
         {
             if (playerPosition.y >= (nodePosition.y - 5) && playerPosition.y <= (nodePosition.y + 5))
             {
-                path.canMove();
+                path.canMove(4f);
             }
         }
         

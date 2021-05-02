@@ -17,8 +17,6 @@ public class PathFollower : MonoBehaviour {
     static Vector3 CurrentPositionHolder;
     void Start() {
         PathNode = GetComponentsInChildren<Node>();
-        
-        Debug.Log(PathNode);
         CheckNode();
     }
 
@@ -39,10 +37,7 @@ public class PathFollower : MonoBehaviour {
 
             if (Player.transform.position != CurrentPositionHolder) {
                 Player.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, Timer);
-                /*
-                Vector3 pos = Player.transform.position;
-                pos.z = 1;
-                Player.transform.position = pos; */
+                
 
             } else {
                 if (CurrentNode < PathNode.Length - 1) {
@@ -58,8 +53,9 @@ public class PathFollower : MonoBehaviour {
         }
     }
 
-    public void canMove()
+    public void canMove(float speed)
     {
         isMove = true;
+        MoveSpeed = speed;
     }
 }
