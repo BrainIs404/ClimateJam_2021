@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 
     public DialogueBox menu;
     public GameObject dialogueManager;
+    public ShowDialogue showDialogue;
     private Queue<string> sentences;
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,12 @@ public class DialogueManager : MonoBehaviour
 
     public void makeChoice() {
         dialogueManager.SetActive(false);
+        showDialogue.Show();
         menu.ShowMessageBox();
     }
 
     public void Hide() {
+        showDialogue.Show();
         dialogueManager.SetActive(false);
     }
 
