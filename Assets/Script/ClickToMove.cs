@@ -7,13 +7,12 @@ public class ClickToMove : MonoBehaviour {
     [Range(2, 12)]
     private float speed = 4f;
     private Vector3 targetPosition;
+    public destination currentDestination;
 
     private bool isMoving = false;
     
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            SetTargetPosition();
-        }
+        
 
         if (isMoving) {
             Move();
@@ -34,6 +33,16 @@ public class ClickToMove : MonoBehaviour {
 
         if (transform.position == targetPosition) {
             isMoving = false;
+            if(currentDestination != null)
+            {
+                currentDestination.PlayerArrived();
+            }
         }
+    }
+
+    public void GoToDestination(destination Target)
+    {
+        currentDestination = Target;
+        SetTargetPosition();
     }
 }
